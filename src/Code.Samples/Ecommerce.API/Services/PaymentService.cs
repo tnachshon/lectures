@@ -1,9 +1,10 @@
 ﻿using Ecommerce.API.EF;
+using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 
 namespace Ecommerce.API.Services
 {
-	public class PaymentService
+	public class PaymentService : IPaymentService
 	{
 		private readonly AppDbContext _dbContext;
 
@@ -15,6 +16,11 @@ namespace Ecommerce.API.Services
 		public IEnumerable<Payment> GetPayments()
 		{
 			return _dbContext.Payments.ToList();
+		}
+
+		public IEnumerable<Payment> GetPayment(Func<Payment, bool> predicate)
+		{
+			return _dbContext.Payments.Where(predicate).ToList();
 		}
 
 		public Payment GetPaymentById(int id)

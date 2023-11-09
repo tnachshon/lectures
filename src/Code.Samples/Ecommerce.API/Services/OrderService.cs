@@ -1,9 +1,10 @@
 ﻿using Ecommerce.API.EF;
+using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 
 namespace Ecommerce.API.Services
 {
-	public class OrderService
+	public class OrderService : IOrderService
 	{
 		private readonly AppDbContext _dbContext;
 

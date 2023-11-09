@@ -1,9 +1,10 @@
 ﻿using Ecommerce.API.EF;
+using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
 
 namespace Ecommerce.API.Services
 {
-	public class CartService
+	public class CartService : ICartService
 	{
 		private readonly AppDbContext _dbContext;
 

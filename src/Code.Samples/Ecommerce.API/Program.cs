@@ -1,4 +1,5 @@
 using Ecommerce.API.EF;
+using Ecommerce.API.Interfaces;
 using Ecommerce.API.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
 		options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<CartService>();
-builder.Services.AddScoped<OrderService>();
-builder.Services.AddScoped<PaymentService>();
+builder.Services.AddTransient<ICartService, CartService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 
