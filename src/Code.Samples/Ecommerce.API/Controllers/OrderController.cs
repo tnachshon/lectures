@@ -1,4 +1,5 @@
-﻿using Ecommerce.API.Models;
+﻿using Ecommerce.API.Interfaces;
+using Ecommerce.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.API.Controllers
@@ -7,44 +8,49 @@ namespace Ecommerce.API.Controllers
 	[ApiController]
 	public class OrderController : ControllerBase
 	{
+		private readonly IOrderService _orderService;
+		public OrderController(IOrderService orderService)
+		{
+			_orderService = orderService;
+		}
 		// GET: api/orders
 		[HttpGet]
 		public IActionResult GetOrders()
 		{
-			return Ok();
-			// Implement logic to retrieve a list of orders
+			var orders = _orderService.GetOrders();
+			return Ok(orders);
 		}
 
 		// GET: api/orders/{id}
 		[HttpGet("{id}")]
 		public IActionResult GetOrder(int id)
 		{
-			return Ok();
-			// Implement logic to retrieve a specific order by ID
+			var order = _orderService.GetOrderById(id);
+			return Ok(order);	
 		}
 
 		// POST: api/orders
 		[HttpPost]
 		public IActionResult CreateOrder([FromBody] Order order)
 		{
-			return Ok();
-			// Implement logic to create a new order
+			var dbOrder = _orderService.CreateOrder(order);
+			return Ok(dbOrder);
 		}
 
 		// PUT: api/orders/{id}
 		[HttpPut("{id}")]
 		public IActionResult UpdateOrder(int id, [FromBody] Order order)
 		{
+			_orderService.UpdateOrder(id, order);
 			return Ok();
-			// Implement logic to update an order
 		}
 
 		// DELETE: api/orders/{id}
 		[HttpDelete("{id}")]
 		public IActionResult DeleteOrder(int id)
 		{
+			_orderService.DeleteOrder(id);
 			return Ok();
-			// Implement logic to delete an order by ID
 		}
 	}
 

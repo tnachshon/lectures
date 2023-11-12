@@ -1,6 +1,8 @@
 ﻿using Ecommerce.API.EF;
 using Ecommerce.API.Interfaces;
 using Ecommerce.API.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Ecommerce.API.Services
 {
@@ -15,7 +17,7 @@ namespace Ecommerce.API.Services
 
 		public IEnumerable<Cart> GetCarts()
 		{
-			return _dbContext.Carts.ToList();
+			return _dbContext.Carts.Include(x => x.Items).ToList();
 		}
 
 		public Cart GetCartById(int id)

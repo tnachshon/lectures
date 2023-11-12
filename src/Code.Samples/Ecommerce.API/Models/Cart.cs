@@ -4,7 +4,7 @@
 	{
 		public int Id { get; set; }
 		public string UserId { get; set; } // Add relevant user identifier
-		public List<CartItem> Items { get; set; }
+		public virtual List<CartItem> Items { get; set; }
 	}
 
 	public class CartItem

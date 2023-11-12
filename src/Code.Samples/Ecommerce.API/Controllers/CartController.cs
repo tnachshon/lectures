@@ -1,4 +1,5 @@
-﻿using Ecommerce.API.Models;
+﻿using Ecommerce.API.Interfaces;
+using Ecommerce.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.API.Controllers
@@ -7,44 +8,50 @@ namespace Ecommerce.API.Controllers
 	[ApiController]
 	public class CartController : ControllerBase
 	{
+		private readonly ICartService _cartService;
+		public CartController(ICartService cartService)
+		{
+			_cartService = cartService;
+		}
+
 		// GET: api/carts
 		[HttpGet]
 		public IActionResult GetCarts()
 		{
-			return Ok();
-			// Implement logic to retrieve a list of carts
+			var carts = _cartService.GetCarts();
+			return Ok(carts);
 		}
 
 		// GET: api/carts/{id}
 		[HttpGet("{id}")]
 		public IActionResult GetCart(int id)
 		{
-			return Ok();
-			// Implement logic to retrieve a specific cart by ID
+			var cart = _cartService.GetCartById(id);	
+			return Ok(cart);	
 		}
 
 		// POST: api/carts
 		[HttpPost]
 		public IActionResult CreateCart([FromBody] Cart cart)
 		{
-			return Ok();
-			// Implement logic to create a new cart
+			var dbCart = _cartService.CreateCart(cart);
+			return Ok(dbCart);
 		}
 
 		// PUT: api/carts/{id}
 		[HttpPut("{id}")]
 		public IActionResult UpdateCart(int id, [FromBody] Cart cart)
 		{
-			return Ok();
-			// Implement logic to update a cart
+			_cartService.UpdateCart(id, cart);
+			return Ok();	
 		}
 
 		// DELETE: api/carts/{id}
 		[HttpDelete("{id}")]
 		public IActionResult DeleteCart(int id)
 		{
+			_cartService.DeleteCart(id);
 			return Ok();
-			// Implement logic to delete a cart by ID
 		}
 	}
 
