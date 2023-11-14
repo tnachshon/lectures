@@ -22,7 +22,21 @@ namespace Code.Samples
 			return quotient;
 		}
 
-		
+		public int OuterFunc(int a, int b)
+		{
+			var innerResult = InnerFunc(a, b);
+			var rand = new Random(DateTime.Now.Millisecond).Next(10, 50);
+			var res = innerResult * rand;
+			return res;
+		}
+
+		private int InnerFunc(int a, int b)
+		{
+			var c = 8;
+			return a + b + c;
+		}
+
+
 	}
 
 }

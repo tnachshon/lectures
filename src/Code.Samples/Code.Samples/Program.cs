@@ -45,6 +45,11 @@ void DebuggingExampleMain()
 
 	int divisionResult = debuggingExample.Divide(dividend, divisor);
 	Console.WriteLine($"Division Result: {divisionResult}");
+
+	int a = 8;
+	int b = 10;
+	int outerFuncResult = debuggingExample.OuterFunc(a, b);
+	Console.WriteLine($"OuterFunc Result: {outerFuncResult}");
 }
 
 
