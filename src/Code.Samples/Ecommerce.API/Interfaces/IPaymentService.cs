@@ -7,8 +7,8 @@ namespace Ecommerce.API.Interfaces
 		IEnumerable<Payment> GetPayments();
 		Payment GetPaymentById(int id);
 		Payment CreatePayment(Payment payment);
-		void UpdatePayment(int id, Payment updatedPayment);
-		void DeletePayment(int id);
+		bool UpdatePayment(int id, Payment updatedPayment);
+		bool DeletePayment(int id);
 	}
 
 }

@@ -32,25 +32,29 @@ namespace Ecommerce.API.Services
 			return cart;
 		}
 
-		public void UpdateCart(int id, Cart updatedCart)
+		public bool UpdateCart(int id, Cart updatedCart)
 		{
 			var existingCart = _dbContext.Carts.FirstOrDefault(c => c.Id == id);
 			if (existingCart != null)
 			{
 				existingCart.UserId = updatedCart.UserId;
 				// Update other properties as needed
-				_dbContext.SaveChanges();
+				var changed = _dbContext.SaveChanges();
+				return changed > 0;
 			}
+			return false;
 		}
 
-		public void DeleteCart(int id)
+		public bool DeleteCart(int id)
 		{
 			var cart = _dbContext.Carts.FirstOrDefault(c => c.Id == id);
 			if (cart != null)
 			{
 				_dbContext.Carts.Remove(cart);
-				_dbContext.SaveChanges();
+				var changed = _dbContext.SaveChanges();
+				return changed > 0;
 			}
+			return false;
 		}
 	}
 

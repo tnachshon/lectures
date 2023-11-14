@@ -7,8 +7,8 @@ namespace Ecommerce.API.Interfaces
 		IEnumerable<Order> GetOrders();
 		Order GetOrderById(int id);
 		Order CreateOrder(Order order);
-		void UpdateOrder(int id, Order updatedOrder);
-		void DeleteOrder(int id);
+		bool UpdateOrder(int id, Order updatedOrder);
+		bool DeleteOrder(int id);
 	}
 
 }

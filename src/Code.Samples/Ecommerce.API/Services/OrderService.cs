@@ -30,25 +30,29 @@ namespace Ecommerce.API.Services
 			return order;
 		}
 
-		public void UpdateOrder(int id, Order updatedOrder)
+		public bool UpdateOrder(int id, Order updatedOrder)
 		{
 			var existingOrder = _dbContext.Orders.FirstOrDefault(o => o.Id == id);
 			if (existingOrder != null)
 			{
 				existingOrder.UserId = updatedOrder.UserId;
 				// Update other properties as needed
-				_dbContext.SaveChanges();
+				var changed = _dbContext.SaveChanges();
+				return changed > 0;
 			}
+			return false;
 		}
 
-		public void DeleteOrder(int id)
+		public bool DeleteOrder(int id)
 		{
 			var order = _dbContext.Orders.FirstOrDefault(o => o.Id == id);
 			if (order != null)
 			{
 				_dbContext.Orders.Remove(order);
-				_dbContext.SaveChanges();
+				var changed =_dbContext.SaveChanges();
+				return changed > 0;
 			}
+			return false;
 		}
 	}
 

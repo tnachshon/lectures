@@ -7,8 +7,8 @@ namespace Ecommerce.API.Interfaces
 		IEnumerable<Cart> GetCarts();
 		Cart GetCartById(int id);
 		Cart CreateCart(Cart cart);
-		void UpdateCart(int id, Cart updatedCart);
-		void DeleteCart(int id);
+		bool UpdateCart(int id, Cart updatedCart);
+		bool DeleteCart(int id);
 	}
 
 }

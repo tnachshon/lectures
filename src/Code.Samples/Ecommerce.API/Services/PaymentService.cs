@@ -35,7 +35,7 @@ namespace Ecommerce.API.Services
 			return payment;
 		}
 
-		public void UpdatePayment(int id, Payment updatedPayment)
+		public bool UpdatePayment(int id, Payment updatedPayment)
 		{
 			var existingPayment = _dbContext.Payments.FirstOrDefault(p => p.Id == id);
 			if (existingPayment != null)
@@ -45,18 +45,22 @@ namespace Ecommerce.API.Services
 				existingPayment.PaymentDate = updatedPayment.PaymentDate;
 				existingPayment.PaymentMethod = updatedPayment.PaymentMethod;
 				// Update other properties as needed
-				_dbContext.SaveChanges();
+				var changed = _dbContext.SaveChanges();
+				return changed > 0;
 			}
+			return false;
 		}
 
-		public void DeletePayment(int id)
+		public bool DeletePayment(int id)
 		{
 			var payment = _dbContext.Payments.FirstOrDefault(p => p.Id == id);
 			if (payment != null)
 			{
 				_dbContext.Payments.Remove(payment);
-				_dbContext.SaveChanges();
+				var changed = _dbContext.SaveChanges();
+				return changed > 0;
 			}
+			return false;
 		}
 	}
 
